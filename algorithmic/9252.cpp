@@ -53,26 +53,14 @@ int main(void) {
 	cout << grid[size2 - 1][size1 - 1] << endl;
 	int count = 1;
 	string output;
-	for (int i = 0; i < size1; i++) {
-		for (int n = 0; n < size2; n++) {
-			if (grid[n][i] == count && grid2[n][i] == true) {//표를 그려보면 이러한 값들이 LCS를 구성함
-				output.push_back(a[i]);
-				count++;
-			}
+	
+	for (int n = 0; n < size1; n++) {
+		if (grid[size2-1][n] == count) {//표를 그려보면 이러한 값들이 LCS를 구성함
+			output.push_back(a[n]);
+			count++;
 		}
 	}
-	if (count != grid[size2 - 1][size1 - 1]+1) {
-		count = 1;
-		output.clear();
-		for (int i = 0; i < size1; i++) {
-			for (int n = 0; n < size2; n++) {
-				if (grid[n][i] == count && grid2[n][i] == true) {//표를 그려보면 이러한 값들이 LCS를 구성함
-					output.push_back(a[i]);
-					count++;
-				}
-			}
-		}
-	}
+	
 	cout << output;
 
 	return 0;
