@@ -51,17 +51,48 @@ int main(void) {
 		}
 	}
 	cout << grid[size2 - 1][size1 - 1] << endl;
-	int count = 1;
+
+	int count = grid[size2 - 1][size1 - 1];
+
+	if (count == 0)
+		return 0;
+
+	for (int n = 0; n < size2; n++) {
+		for (int m = 0; m < size1; m++) {
+			cout << grid[n][m]<<' ';
+		}
+		cout << '\n';
+	}
+	int n = size2 - 1;
+	int m = size1 - 1;
 	string output;
 	
-	for (int n = 0; n < size1; n++) {
-		if (grid[size2-1][n] == count) {//표를 그려보면 이러한 값들이 LCS를 구성함
-			output.push_back(a[n]);
-			count++;
+	do{
+		if (m != 0) {
+			while (grid[n][m - 1] == count) {
+				m--;
+				if (m == 0)
+					break;
+			}
 		}
-	}
+
+		if (n != 0) {
+			while (grid[n - 1][m] == count) {
+				n--;
+				if (n == 0)
+					break;
+			}
+		}
+
+		output.push_back(b[n]);
+		n--;
+		m--;
+		count--;
+
+	} while (count > 0);
 	
-	cout << output;
+	reverse(output.begin(), output.end());
+	cout << output<<'\n';
 
 	return 0;
 }
