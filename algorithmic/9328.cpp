@@ -133,7 +133,7 @@ public:
 
 	void travel() {
 		int loop_break=0;
-		while (loop_break != next_move.size()) {//탈출 조건 추가해야함
+		while (loop_break != next_move.size()) {
 			int n = next_move.front().first;
 			int m = next_move.front().second;
 			int size = next_move.size();
