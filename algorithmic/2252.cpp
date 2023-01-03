@@ -4,8 +4,8 @@
 using namespace std;
 
 /*
-* »ç¿ë ¾Ë°í¸®Áò
-* À§»ó Á¤·Ä
+* ì‚¬ìš© ì•Œê³ ë¦¬ì¦˜
+* ìœ„ìƒ ì •ë ¬
 */
 
 int main() {
@@ -16,9 +16,9 @@ int main() {
 	int N, M;
 	cin >> N >> M;
 	
-	int* in_degree = new int[N + 1]{0,};//ÁøÀÔÂ÷¼ö ÀúÀå
-	list<int>* adj_list = new list<int>[N + 1];//ÀÎÁ¢ ³ëµå ¸®½ºÆ®
-	list<int> sort_arr;//À§»ó Á¤·Ä ¸®½ºÆ®
+	int* in_degree = new int[N + 1]{0,};//ì§„ì…ì°¨ìˆ˜ ì €ì¥
+	list<int>* adj_list = new list<int>[N + 1];//ì¸ì ‘ ë…¸ë“œ ë¦¬ìŠ¤íŠ¸
+	list<int> sort_arr;//ìœ„ìƒ ì •ë ¬ ë¦¬ìŠ¤íŠ¸
 
 	for (int i = 0; i < M; i++) {
 		int i1, i2;
@@ -27,23 +27,23 @@ int main() {
 		in_degree[i2]++;
 	}
 
-	//À§»ó Á¤·Ä
-	list<int> queue;//Á¤·Ä ´ë±â¿­
+	//ìœ„ìƒ ì •ë ¬
+	list<int> queue;//ì •ë ¬ ëŒ€ê¸°ì—´
 	for (int i = 1; i <= N; i++)
 		if (in_degree[i] == 0)
 			queue.push_back(i);
 	while (!queue.empty()) {
-		int node = queue.front();//Á¤·ÄÇÒ ³ëµå
+		int node = queue.front();//ì •ë ¬í•  ë…¸ë“œ
 		queue.pop_front();
 		for (list<int>::iterator iter = adj_list[node].begin(); iter != adj_list[node].end(); iter++) {
-			int adj_node = *iter;//Á¤·ÄÇÒ ³ëµå¿Í ÀÎÁ¢ÇÑ ³ëµå
+			int adj_node = *iter;//ì •ë ¬í•  ë…¸ë“œì™€ ì¸ì ‘í•œ ë…¸ë“œ
 			if (--in_degree[adj_node] == 0)
-				queue.push_back(adj_node);//´õ ÀÌ»ó ÁøÀÔ³ëµå°¡ ¾ø´Â ³ëµå¸¦ Á¤·Ä ´ë±â¿­¿¡ Ãß°¡
+				queue.push_back(adj_node);//ë” ì´ìƒ ì§„ì…ë…¸ë“œê°€ ì—†ëŠ” ë…¸ë“œë¥¼ ì •ë ¬ ëŒ€ê¸°ì—´ì— ì¶”ê°€
 		}
 		sort_arr.push_back(node);
 	}
 
-	//Á¤´ä Ãâ·Â
+	//ì •ë‹µ ì¶œë ¥
 	for (list<int>::iterator iter = sort_arr.begin(); iter != sort_arr.end(); iter++)
 		cout << *iter << ' ';
 	cout << '\n';

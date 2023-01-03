@@ -3,11 +3,11 @@
 using namespace std;
 
 /*
-* »ç¿ë ¾Ë°í¸®Áò
-* ´ÙÀÌ³ª¹Í ÇÁ·Î±×·¡¹Ö
+* ì‚¬ìš© ì•Œê³ ë¦¬ì¦˜
+* ë‹¤ì´ë‚˜ë¯¹ í”„ë¡œê·¸ë˜ë°
 */
 
-int arr[2001];//¼ö¿­
+int arr[2001];//ìˆ˜ì—´
 bool table[2001][2001] = { false, };
 
 int main() {
@@ -18,10 +18,10 @@ int main() {
 	int N,M;
 	cin >> N;
 
-	for (int i = 1; i <= N; i++) {//¼ö¿­ ÀÔ·Â ¹Ş±â
+	for (int i = 1; i <= N; i++) {//ìˆ˜ì—´ ì…ë ¥ ë°›ê¸°
 		cin >> arr[i];
 	}
-	//Å×ÀÌºí Ã¤¿ì±â
+	//í…Œì´ë¸” ì±„ìš°ê¸°
 	table[1][1] = true;
 	for (int i = 2; i <= N; i++) {
 		table[i][i] = true;
@@ -31,7 +31,7 @@ int main() {
 	for (int i = 2; i <= N-1; i++) {
 		for (int n = 1; n+i <= N; n++) {
 			if (arr[i+n] == arr[n])
-				table[n+i][n] = table[n+i-1][n+1];//s+1,e-1ÀÇ ÆÓ¸°µå·Ò ¿©ºÎ
+				table[n+i][n] = table[n+i-1][n+1];//s+1,e-1ì˜ íŒ°ë¦°ë“œë¡¬ ì—¬ë¶€
 		}
 	}
 

@@ -16,36 +16,36 @@ int main(void) {
 	cin >> b;
 	int size1 = a.size();
 	int size2 = b.size();
-	int** grid = new int* [size2];//LSC ±æÀÌ ÀúÀå ¹è¿­
+	int** grid = new int* [size2];//LSC ê¸¸ì´ ì €ì¥ ë°°ì—´
 	for (int i = 0; i < size2; i++)
 		grid[i] = new int[size1] {0, };
-	bool** grid2 = new bool* [size2];//µÎ ¹®ÀÚ¿­¿¡¼­ °°Àº ¹®ÀÚÀÇ À§Ä¡¸¦ ÀúÀåÇÏ´Â ¹è¿­
+	bool** grid2 = new bool* [size2];//ë‘ ë¬¸ìì—´ì—ì„œ ê°™ì€ ë¬¸ìì˜ ìœ„ì¹˜ë¥¼ ì €ì¥í•˜ëŠ” ë°°ì—´
 	for (int i = 0; i < size2; i++)
 		grid2[i] = new bool[size1] {false, };
-	for (int i = 0, input = 0; i < size2; i++) {//°İÀÚÀÇ 1¿­ °è»ê,inputÀº °İÀÚ¿¡ ³ÖÀ» ¼ö
+	for (int i = 0, input = 0; i < size2; i++) {//ê²©ìì˜ 1ì—´ ê³„ì‚°,inputì€ ê²©ìì— ë„£ì„ ìˆ˜
 		if (a[0] == b[i]) {
-			input = 1;//°°Àº ¹®ÀÚ³ª¿À¸é ±×ÀÌÈÄ·Î 1´ëÀÔ
+			input = 1;//ê°™ì€ ë¬¸ìë‚˜ì˜¤ë©´ ê·¸ì´í›„ë¡œ 1ëŒ€ì…
 			grid2[i][0] = true;
 		}
 		grid[i][0] = input;
 	}
-	for (int i = 0, input = 0; i < size1; i++) {//°İÀÚÀÇ 1Çà °è»ê,inputÀº °İÀÚ¿¡ ³ÖÀ» ¼ö
+	for (int i = 0, input = 0; i < size1; i++) {//ê²©ìì˜ 1í–‰ ê³„ì‚°,inputì€ ê²©ìì— ë„£ì„ ìˆ˜
 		if (a[i] == b[0]) {
-			input = 1;//°°Àº ¹®ÀÚ³ª¿À¸é ±×ÀÌÈÄ·Î 1´ëÀÔ
+			input = 1;//ê°™ì€ ë¬¸ìë‚˜ì˜¤ë©´ ê·¸ì´í›„ë¡œ 1ëŒ€ì…
 			grid2[0][i] = true;
 		}
 		grid[0][i] = input;
 	}
-	for (int i = 1; i < size1; i++) {//°İÀÚÀÇ i¿­ °è»ê
-		int input = grid[0][i];//¹®ÀÚ¸¦ ºÙ¿©¼­ ºñ±³ÇÏ±âÀü »óÅÂÀÇ LCS°ªÀ» ÃÊ±â ´ëÀÔ°ªÀ¸·Î ¼³Á¤
+	for (int i = 1; i < size1; i++) {//ê²©ìì˜ iì—´ ê³„ì‚°
+		int input = grid[0][i];//ë¬¸ìë¥¼ ë¶™ì—¬ì„œ ë¹„êµí•˜ê¸°ì „ ìƒíƒœì˜ LCSê°’ì„ ì´ˆê¸° ëŒ€ì…ê°’ìœ¼ë¡œ ì„¤ì •
 		for (int n = 1; n < size2; n++) {
-			if (a[i] == b[n]) {//»õ·ÎºÙÀº ¹®ÀÚ µÎ°³°¡ ÀÏÄ¡ÇÒ°æ¿ì
-				input = grid[n - 1][i - 1] + 1;//±âÁ¸ ¹®ÀÚ¿­ µÎ°³ÀÇ LCS°ª + 1À» ´ëÀÔ°ªÀ¸·Î ¼³Á¤
+			if (a[i] == b[n]) {//ìƒˆë¡œë¶™ì€ ë¬¸ì ë‘ê°œê°€ ì¼ì¹˜í• ê²½ìš°
+				input = grid[n - 1][i - 1] + 1;//ê¸°ì¡´ ë¬¸ìì—´ ë‘ê°œì˜ LCSê°’ + 1ì„ ëŒ€ì…ê°’ìœ¼ë¡œ ì„¤ì •
 				grid[n][i] = input;
 				grid2[n][i] = true;
 			}
 			else {
-				input = grid[n - 1][i] > grid[n][i - 1] ? grid[n - 1][i] : grid[n][i - 1];//a[i]¸¦ ºÙÀÎ°æ¿ìÀÇ LCS°ª°ú a[i]¸¦ ¾ÈºÙÀÎ LCS°ªÀ» ºñ±³ÇØ¼­ ´õ Å«°ªÀ» ´ëÀÔ
+				input = grid[n - 1][i] > grid[n][i - 1] ? grid[n - 1][i] : grid[n][i - 1];//a[i]ë¥¼ ë¶™ì¸ê²½ìš°ì˜ LCSê°’ê³¼ a[i]ë¥¼ ì•ˆë¶™ì¸ LCSê°’ì„ ë¹„êµí•´ì„œ ë” í°ê°’ì„ ëŒ€ì…
 				grid[n][i] = input;
 			}
 		}

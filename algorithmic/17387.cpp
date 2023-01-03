@@ -12,7 +12,7 @@ int main(void) {
 
 	cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4;
 
-	//Çà·Ä °è»êÀ» ÅëÇÑ µÎ Á÷¼±ÀÇ ±³Á¡ ±¸ÇÏ±â
+	//í–‰ë ¬ ê³„ì‚°ì„ í†µí•œ ë‘ ì§ì„ ì˜ êµì  êµ¬í•˜ê¸°
 	long long a = y2 - y1;
 	long long b = x1 - x2;
 	long long c = y4 - y3;
@@ -23,16 +23,16 @@ int main(void) {
 
 	long long meet_x;
 	long long meet_y;
-	if (det == 0) {//µÎ Á÷¼±ÀÌ ÆòÇàÇÑ °æ¿ì
+	if (det == 0) {//ë‘ ì§ì„ ì´ í‰í–‰í•œ ê²½ìš°
 		det = 1;
 		long long g = x1 - x3;
 		long long h = y1 - y3;
-		if (-c * g != h * d) {//µ¿ÀÏÇÑ Á÷¼±ÀÌ ¾Æ´Ñ °æ¿ì
+		if (-c * g != h * d) {//ë™ì¼í•œ ì§ì„ ì´ ì•„ë‹Œ ê²½ìš°
 			cout << "0" << '\n';
 			return 0;
 		}
-		else {//µ¿ÀÏ Á÷¼±ÀÎ °æ¿ì 
-			//ÇÏ³ªÀÇ ¼±ºÐ ¹Û¿¡ ÀÖ´Â Á¡ÀÇ ¹Ý´ëÂÊ Á¡Àº ±³Á¡ÀÌ µÉ °¡´É¼ºÀÌ ÀÖÀ½
+		else {//ë™ì¼ ì§ì„ ì¸ ê²½ìš° 
+			//í•˜ë‚˜ì˜ ì„ ë¶„ ë°–ì— ìžˆëŠ” ì ì˜ ë°˜ëŒ€ìª½ ì ì€ êµì ì´ ë  ê°€ëŠ¥ì„±ì´ ìžˆìŒ
 			if (x1 == x3 && x2 == x4) {
 				if (((y3 > y1 && y3 > y2) || (y3 < y1 && y3 < y2)) && ((y4 > y1 && y4 > y2) || (y4 < y1 && y4 < y2))) {
 					meet_x = x1 * det;
@@ -99,12 +99,12 @@ int main(void) {
 			}
 		}
 	}
-	else {//ÆòÇàÇÏÁö ¾Ê´Â °æ¿ì
+	else {//í‰í–‰í•˜ì§€ ì•ŠëŠ” ê²½ìš°
 		meet_x = (e * d - f * b);
 		meet_y = (-e * c + a * f);
 	}
 
-	//±³Á¡ÀÌ µÎ ¼±ºÐ À§¿¡ ÀÖ´ÂÁö È®ÀÎ
+	//êµì ì´ ë‘ ì„ ë¶„ ìœ„ì— ìžˆëŠ”ì§€ í™•ì¸
 	bool answer = true;
 
 	if ((meet_x > x1 * det && meet_x > x2 * det) || (meet_x < x1 * det && meet_x < x2 * det))

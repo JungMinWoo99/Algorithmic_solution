@@ -4,8 +4,8 @@
 using namespace std;
 
 /*
-* »ç¿ë ¾Ë°í¸®Áò
-* À§»ó Á¤·Ä ÀÀ¿ë
+* ì‚¬ìš© ì•Œê³ ë¦¬ì¦˜
+* ìœ„ìƒ ì •ë ¬ ì‘ìš©
 */
 
 int main() {
@@ -15,49 +15,49 @@ int main() {
 
 	int N, M;
 	cin >> N >> M;
-	deque<int>* order_deque = new deque<int>[N + 1];//°¢ °¡¼öÀÇ ¹Ù·Î ´ÙÀ½ ¿ì¼±¼øÀ§ÀÇ °¡¼ö ¸®½ºÆ®
-	int* in_deg = new int[N + 1]{ 0, };//in_degree ÀúÀå
-	bool* is_sort = new bool[N + 1]{ false, };//Á¤·Ä ¿©ºÎ¸¦ ÀúÀå
-	deque<int> search_queue;//Å½»ö ´ë±â¿­
+	deque<int>* order_deque = new deque<int>[N + 1];//ê° ê°€ìˆ˜ì˜ ë°”ë¡œ ë‹¤ìŒ ìš°ì„ ìˆœìœ„ì˜ ê°€ìˆ˜ ë¦¬ìŠ¤íŠ¸
+	int* in_deg = new int[N + 1]{ 0, };//in_degree ì €ì¥
+	bool* is_sort = new bool[N + 1]{ false, };//ì •ë ¬ ì—¬ë¶€ë¥¼ ì €ì¥
+	deque<int> search_queue;//íƒìƒ‰ ëŒ€ê¸°ì—´
 	deque<int> answer;
 
-	//°¢ º¯¼öµéÀÇ ÃÊ±â°ª ¼³Á¤
+	//ê° ë³€ìˆ˜ë“¤ì˜ ì´ˆê¸°ê°’ ì„¤ì •
 	for (int m = 0; m < M; m++) {
-		int singer;//ÀÔ·Â¹Ş´Â °¡¼öÀÇ ¼ö
+		int singer;//ì…ë ¥ë°›ëŠ” ê°€ìˆ˜ì˜ ìˆ˜
 		cin >> singer;
-		int* order = new int[singer];//¼ø¼­¸¦ ÀÔ·Â¹ŞÀ» ¹è¿­
+		int* order = new int[singer];//ìˆœì„œë¥¼ ì…ë ¥ë°›ì„ ë°°ì—´
 		for (int i = 0; i < singer; i++)
 			cin >> order[i];
-		for (int i = 1; i < singer; i++)//in_degree Ä«¿îÆÃ
+		for (int i = 1; i < singer; i++)//in_degree ì¹´ìš´íŒ…
 			in_deg[order[i]]++;
-		for (int i = 0; i < singer - 1; i++)//order_deque ÀÛ¼º
+		for (int i = 0; i < singer - 1; i++)//order_deque ì‘ì„±
 			order_deque[order[i]].push_back(order[i + 1]);
 		delete[] order;
 	}
 
-	//Á¤´ä Ã£±â
+	//ì •ë‹µ ì°¾ê¸°
 	for (int i = 1; i <= N; i++)
 		if (in_deg[i] == 0)
-			search_queue.push_back(i);//ÁøÀÔÂ÷¼ö°¡ 0ÀÎ ³ëµå ºÎÅÍ Å½»ö ¹× Á¤·Ä
-	while (!search_queue.empty()) {//¸ğµç °¡¼öµéÀÌ Á¤·ÄµÉ ¶§±îÁö
+			search_queue.push_back(i);//ì§„ì…ì°¨ìˆ˜ê°€ 0ì¸ ë…¸ë“œ ë¶€í„° íƒìƒ‰ ë° ì •ë ¬
+	while (!search_queue.empty()) {//ëª¨ë“  ê°€ìˆ˜ë“¤ì´ ì •ë ¬ë  ë•Œê¹Œì§€
 		int node = search_queue.front();
 		search_queue.pop_front();
-		answer.push_back(node);//node °¡¼ö Á¤·Ä
-		is_sort[node] = true;//Á¤·ÄµÊÀ» Ã¼Å©
-		//Á¤·ÄµÈ °¡¼öÀÇ ´ÙÀ½ ¹Ù·Î ´ÙÀ½ ¿ì¼±¼øÀ§ °¡¼öµéÀÇ in_degree°¨¼Ò
+		answer.push_back(node);//node ê°€ìˆ˜ ì •ë ¬
+		is_sort[node] = true;//ì •ë ¬ë¨ì„ ì²´í¬
+		//ì •ë ¬ëœ ê°€ìˆ˜ì˜ ë‹¤ìŒ ë°”ë¡œ ë‹¤ìŒ ìš°ì„ ìˆœìœ„ ê°€ìˆ˜ë“¤ì˜ in_degreeê°ì†Œ
 		for (int n = 0; n < order_deque[node].size(); n++) {
-			if (is_sort[order_deque[node][n]] == true) {//ÀÌ¹Ì Á¤·ÄµÈ °¡¼ö°¡ ÈÄ¼øÀ§ÀÎ°æ¿ì->¼ø¼­ Á¤ÇÏ±â ºÒ°¡´É
+			if (is_sort[order_deque[node][n]] == true) {//ì´ë¯¸ ì •ë ¬ëœ ê°€ìˆ˜ê°€ í›„ìˆœìœ„ì¸ê²½ìš°->ìˆœì„œ ì •í•˜ê¸° ë¶ˆê°€ëŠ¥
 				cout << '0' << '\n';
 				return 0;
 			}
 			in_deg[order_deque[node][n]]--;
-			if (in_deg[order_deque[node][n]] == 0)//´õ ÀÌ»ó ÁøÀÔ ³ëµå°¡ ¾ø´Â °æ¿ì
-				search_queue.push_back(order_deque[node][n]);//Å½»ö ´ë±â¿­¿¡ Ãß°¡
+			if (in_deg[order_deque[node][n]] == 0)//ë” ì´ìƒ ì§„ì… ë…¸ë“œê°€ ì—†ëŠ” ê²½ìš°
+				search_queue.push_back(order_deque[node][n]);//íƒìƒ‰ ëŒ€ê¸°ì—´ì— ì¶”ê°€
 		}
 	}
 
-	//Á¤´ä Ãâ·Â
-	if (answer.size() != N) {//Á¤»óÀûÀ¸·Î Á¤·ÄµÇ¾ú´Ù¸é ¸ğµç ³ëµå°¡ Á¤·ÄµÇÀÖ¾î¾ßÇÔ
+	//ì •ë‹µ ì¶œë ¥
+	if (answer.size() != N) {//ì •ìƒì ìœ¼ë¡œ ì •ë ¬ë˜ì—ˆë‹¤ë©´ ëª¨ë“  ë…¸ë“œê°€ ì •ë ¬ë˜ìˆì–´ì•¼í•¨
 		cout << '0' << '\n';
 		return 0;
 	}

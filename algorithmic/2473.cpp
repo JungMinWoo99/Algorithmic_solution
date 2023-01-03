@@ -6,7 +6,7 @@
 using namespace std;
 
 /*
-* »ç¿ë ¾Ë°í¸®Áò
+* ì‚¬ìš© ì•Œê³ ë¦¬ì¦˜
 */
 
 int main() {
@@ -16,7 +16,7 @@ int main() {
 
 	int N;
 	cin >> N;
-	vector<double> val_arr;//°¢ ¿ë¾×ÀÇ Æ¯¼º°ª
+	vector<double> val_arr;//ê° ìš©ì•¡ì˜ íŠ¹ì„±ê°’
 
 	for (int i = 1; i <= N; i++) {
 		int input;
@@ -32,9 +32,9 @@ int main() {
 		int l = k + 1;
 		int r = N - 1;
 
-		//µÎ ¿ë¾× ¼Ö·ç¼Ç
+		//ë‘ ìš©ì•¡ ì†”ë£¨ì…˜
 		while (l < r) {
-			//ÇöÁ¦ k,l,r ¿ë¾×ÀÇ Æ¯¼º°ªÀÌ ±âÁ¸ ÃÖ¼Ò Æ¯¼º°ªº¸´Ù °³¼±µÇ¾úÀ» °æ¿ì
+			//í˜„ì œ k,l,r ìš©ì•¡ì˜ íŠ¹ì„±ê°’ì´ ê¸°ì¡´ ìµœì†Œ íŠ¹ì„±ê°’ë³´ë‹¤ ê°œì„ ë˜ì—ˆì„ ê²½ìš°
 			double val_sum = val_arr[k] + val_arr[l] + val_arr[r];
 			if (answer > fabs(val_sum)) {
 				answer = fabs(val_sum);
@@ -49,7 +49,7 @@ int main() {
 		}
 	}
 
-	//Á¤´ä Ãâ·Â
+	//ì •ë‹µ ì¶œë ¥
 	for (int i = 0; i < 3; i++)
 		cout << answer_arr[i] << '\n';
 

@@ -4,8 +4,8 @@
 using namespace std;
 
 /*
-* »ç¿ë ¾Ë°í¸®Áò
-* À§»ó Á¤·Ä
+* ì‚¬ìš© ì•Œê³ ë¦¬ì¦˜
+* ìœ„ìƒ ì •ë ¬
 */
 
 int main() {
@@ -17,65 +17,65 @@ int main() {
 	for (int t_num = 0; t_num < T; t_num++) {
 		int N;
 		cin >> N;
-		int* con_time = new int[N + 1];//°Ç¼³ ½Ã°£ ÀúÀå
-		int* dp_time = new int[N + 1];//´©Àû °Ç¼³ ½Ã°£ ÀúÀå
-		deque<int> sort_arr;//À§»ó Á¤·Ä ÀúÀå
-		int* in_deg = new int[N + 1]{ 0, };//ÁøÀÔÂ÷¼ö ÀúÀå
-		bool* in_check= new bool[N + 1]{ false, };//À§»óÁ¤·Ä¼öÇà½Ã ÀÌ¹Ì µé¾î°£ ³ëµå È®ÀÎ¿ë
-		deque<int>* next_n_deque = new deque<int>[N + 1];//°¢ ³ëµåÀÇ ´ÙÀ½ ³ëµå
-		deque<int>* pre_n_deque = new deque<int>[N + 1];//°¢ ³ëµåÀÇ ÀÌÀü ³ëµå
+		int* con_time = new int[N + 1];//ê±´ì„¤ ì‹œê°„ ì €ì¥
+		int* dp_time = new int[N + 1];//ëˆ„ì  ê±´ì„¤ ì‹œê°„ ì €ì¥
+		deque<int> sort_arr;//ìœ„ìƒ ì •ë ¬ ì €ì¥
+		int* in_deg = new int[N + 1]{ 0, };//ì§„ì…ì°¨ìˆ˜ ì €ì¥
+		bool* in_check= new bool[N + 1]{ false, };//ìœ„ìƒì •ë ¬ìˆ˜í–‰ì‹œ ì´ë¯¸ ë“¤ì–´ê°„ ë…¸ë“œ í™•ì¸ìš©
+		deque<int>* next_n_deque = new deque<int>[N + 1];//ê° ë…¸ë“œì˜ ë‹¤ìŒ ë…¸ë“œ
+		deque<int>* pre_n_deque = new deque<int>[N + 1];//ê° ë…¸ë“œì˜ ì´ì „ ë…¸ë“œ
 		int K;
 		cin >> K;
-		for (int i = 1; i <= N; i++)//°Ç¼³ ½Ã°£ ÀÔ·Â¹Ş±â
+		for (int i = 1; i <= N; i++)//ê±´ì„¤ ì‹œê°„ ì…ë ¥ë°›ê¸°
 			cin >> con_time[i];
 		for (int i = 0; i < K; i++) {
 			int i1, i2;
 			cin >> i1 >> i2;
 			in_deg[i2]++;
-			next_n_deque[i1].push_back(i2);//´ÙÀ½ ³ëµå ¸®½ºÆ® ÀÛ¼º
-			pre_n_deque[i2].push_back(i1);//´ÙÀ½ ³ëµå ¸®½ºÆ® ÀÛ¼º
+			next_n_deque[i1].push_back(i2);//ë‹¤ìŒ ë…¸ë“œ ë¦¬ìŠ¤íŠ¸ ì‘ì„±
+			pre_n_deque[i2].push_back(i1);//ë‹¤ìŒ ë…¸ë“œ ë¦¬ìŠ¤íŠ¸ ì‘ì„±
 		}
 		
 
-		//À§»ó Á¤·Ä
-		deque<int> queue;//´ë±â¿­
-		for (int i = 0; i< N; i++) {//À§»ó Á¤·Ä Å¥¿¡ ¸ğµç ³ëµå°¡ µé¾î°¥ ¶§ ±îÁö
+		//ìœ„ìƒ ì •ë ¬
+		deque<int> queue;//ëŒ€ê¸°ì—´
+		for (int i = 0; i< N; i++) {//ìœ„ìƒ ì •ë ¬ íì— ëª¨ë“  ë…¸ë“œê°€ ë“¤ì–´ê°ˆ ë•Œ ê¹Œì§€
 			int node = i + 1;
-			if (in_deg[node] == 0 && in_check[node] == false)//ÁøÀÔÂ÷¼ö°¡ 0ÀÌ°í ¾ÆÁ÷ Á¤·ÄµÇÁö ¾ÊÀº ³ëµåÀÎ °æ¿ì
+			if (in_deg[node] == 0 && in_check[node] == false)//ì§„ì…ì°¨ìˆ˜ê°€ 0ì´ê³  ì•„ì§ ì •ë ¬ë˜ì§€ ì•Šì€ ë…¸ë“œì¸ ê²½ìš°
 				queue.push_back(node);
 		}
 		
 		while (!queue.empty()) {
-			int node = queue.front();//¶³¾îÁø ³ëµå
+			int node = queue.front();//ë–¨ì–´ì§„ ë…¸ë“œ
 			queue.pop_front();
 		
-			for (deque<int>::iterator iter = next_n_deque[node].begin(); iter != next_n_deque[node].end(); iter++) {//¶³¾îÁø ³ëµå¿Í ÀÎÁ¢ÇÑ ³ëµå Å½»ö
+			for (deque<int>::iterator iter = next_n_deque[node].begin(); iter != next_n_deque[node].end(); iter++) {//ë–¨ì–´ì§„ ë…¸ë“œì™€ ì¸ì ‘í•œ ë…¸ë“œ íƒìƒ‰
 				int next_node = *iter;
-				if (--in_deg[next_node] == 0)//´ÙÀ½ ³ëµåÀÇ ÁøÀÔÂ÷¼ö¸¦ 1°¨¼Ò½ÃÅ°°í ¸¸¾à 0ÀÌµÈ´Ù¸é ´ë±â¿­¿¡ Ãß°¡
+				if (--in_deg[next_node] == 0)//ë‹¤ìŒ ë…¸ë“œì˜ ì§„ì…ì°¨ìˆ˜ë¥¼ 1ê°ì†Œì‹œí‚¤ê³  ë§Œì•½ 0ì´ëœë‹¤ë©´ ëŒ€ê¸°ì—´ì— ì¶”ê°€
 					queue.push_back(next_node);
 			}
 			
-			sort_arr.push_back(node);//node¸¦ Á¤·Ä
-			in_check[node] = true;//node°¡ Á¤·ÄµÊÀ» Ç¥½Ã
+			sort_arr.push_back(node);//nodeë¥¼ ì •ë ¬
+			in_check[node] = true;//nodeê°€ ì •ë ¬ë¨ì„ í‘œì‹œ
 		}
 		
 		/*
-		//Á¤·Ä È®ÀÎ ÄÚµå
+		//ì •ë ¬ í™•ì¸ ì½”ë“œ
 		cout << '\n';
 		for (deque<int>::iterator iter = sort_arr.begin(); iter != sort_arr.end(); iter++)
 			cout << *iter << ' ';
 		cout << '\n';
 		*/
 
-		//dp°úÁ¤
+		//dpê³¼ì •
 		for (deque<int>::iterator iter = sort_arr.begin(); iter != sort_arr.end(); iter++) {
 			int node = *iter;
 			int time = con_time[node];
-			int max_time = time;//ÇØ´ç °Ç¹° °Ç¼³±îÁö °É¸®´Â ½Ã°£ÀÇ ÃÖ´ñ°ª
+			int max_time = time;//í•´ë‹¹ ê±´ë¬¼ ê±´ì„¤ê¹Œì§€ ê±¸ë¦¬ëŠ” ì‹œê°„ì˜ ìµœëŒ“ê°’
 			
 			for (deque<int>::iterator iter = pre_n_deque[node].begin(); iter != pre_n_deque[node].end(); iter++) {
-				if (max_time < time + dp_time[*iter])//±âÁ¸½Ã°£º¸´Ù ´õ ¿À·£ ½Ã°£ÀÌ °É¸®¸é
-					max_time = time + dp_time[*iter];//ÃÖ´ñ°ª °»½Å
+				if (max_time < time + dp_time[*iter])//ê¸°ì¡´ì‹œê°„ë³´ë‹¤ ë” ì˜¤ëœ ì‹œê°„ì´ ê±¸ë¦¬ë©´
+					max_time = time + dp_time[*iter];//ìµœëŒ“ê°’ ê°±ì‹ 
 			}
 			dp_time[node] = max_time;
 		}

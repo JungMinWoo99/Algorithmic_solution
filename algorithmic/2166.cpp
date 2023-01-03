@@ -4,7 +4,7 @@
 
 using namespace std;
 
-double get_tri_area(double x1,double x2, double x3, double y1, double y2, double y3) {//¿ÜÀûÀ» ÅëÇÑ ³ĞÀÌ ±¸ÇÏ±â
+double get_tri_area(double x1,double x2, double x3, double y1, double y2, double y3) {//ì™¸ì ì„ í†µí•œ ë„“ì´ êµ¬í•˜ê¸°
 	double first = x1 * y2 + x2 * y3 + x3 * y1;
 	double second = x1 * y3 + x3 * y2 + x2 * y1;
 	return (first - second) * 0.5;
@@ -26,15 +26,15 @@ int main() {
 		arr.push_back(make_pair(x, y));
 	}
 
-	pair<double, double> core_podouble = arr.front();//¸ğµç »ï°¢Çü¿¡ Æ÷ÇÔµÇ´Â ²ÀÁöÁ¡
+	pair<double, double> core_podouble = arr.front();//ëª¨ë“  ì‚¼ê°í˜•ì— í¬í•¨ë˜ëŠ” ê¼­ì§€ì 
 	arr.pop_front();
-	list<pair<double, double>> rest_podouble;//³ª¸ÓÁö ²ÀÁöÁ¡ µÎ°³¸¦ ´ã´Â ¸®½ºÆ®
+	list<pair<double, double>> rest_podouble;//ë‚˜ë¨¸ì§€ ê¼­ì§€ì  ë‘ê°œë¥¼ ë‹´ëŠ” ë¦¬ìŠ¤íŠ¸
 
 	double x1, x2, x3, y1, y2, y3;
 	x1 = core_podouble.first;
 	y1 = core_podouble.second;
 
-	//ÃÊ±â ¼¼ÆÃ
+	//ì´ˆê¸° ì„¸íŒ…
 	rest_podouble.push_back(arr.front());
 	arr.pop_front();
 	rest_podouble.push_back(arr.front());
@@ -50,7 +50,7 @@ int main() {
 
 		answer += get_tri_area(x1, x2, x3, y1, y2, y3);
 
-		if (arr.empty())//´õ ÀÌ»ó ³²Àº ²ÀÁöÁ¡ÀÌ ¾ø´Â °æ¿ì
+		if (arr.empty())//ë” ì´ìƒ ë‚¨ì€ ê¼­ì§€ì ì´ ì—†ëŠ” ê²½ìš°
 			break;
 
 		rest_podouble.push_back(arr.front());

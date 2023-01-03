@@ -41,7 +41,7 @@ int main(void) {
 	int half1 = N / 2;
 	int half2 = N - half1;
 
-	//�Է�
+	//ÀÔ·Â
 
 	for (int i = 0; i < half1; i++) {
 		int input;

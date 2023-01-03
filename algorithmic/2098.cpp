@@ -6,13 +6,13 @@ int N;
 int W[17][17]={0,};
 int DP[17][(1<<16)]={0,};
 
-//ÇöÀçÀ§Ä¡, »óÅÂ¿¡¼­ ³²Àº µµ½Ã¸¦ ¹æ¹®ÇÏ°í µ¹¾Æ°¡´Â »óÈ²±îÁö ÇÊ¿äÇÑ ºñ¿ë °è»ê
+//í˜„ì¬ìœ„ì¹˜, ìƒíƒœì—ì„œ ë‚¨ì€ ë„ì‹œë¥¼ ë°©ë¬¸í•˜ê³  ëŒì•„ê°€ëŠ” ìƒí™©ê¹Œì§€ í•„ìš”í•œ ë¹„ìš© ê³„ì‚°
 int dfs(int cur_pos, int cur_stat) {
 
 	if (DP[cur_pos][cur_stat] != 0)
 		return DP[cur_pos][cur_stat];
 
-	if (cur_stat + 1 == (1<<N)) {//¸ğµç ³ëµå¸¦ ¹æ¹®ÇÑ °æ¿ì
+	if (cur_stat + 1 == (1<<N)) {//ëª¨ë“  ë…¸ë“œë¥¼ ë°©ë¬¸í•œ ê²½ìš°
 		if (W[cur_pos][1] == 0) {
 			DP[cur_pos][cur_stat] = -1;
 			return -1;
@@ -22,20 +22,20 @@ int dfs(int cur_pos, int cur_stat) {
 			return W[cur_pos][1];
 		}
 	}
-	else {//¾ÆÁ÷ ¸ğµç ³ëµå¸¦ ¹æ¹®ÇÏÁö ¾ÊÀº °æ¿ì
+	else {//ì•„ì§ ëª¨ë“  ë…¸ë“œë¥¼ ë°©ë¬¸í•˜ì§€ ì•Šì€ ê²½ìš°
 
-		bool check_block = true;//´õÀÌ»ó ÁøÇàºÒ°¡´ÉÇÑ »óÈ²ÀÓÀ» È®ÀÎ
+		bool check_block = true;//ë”ì´ìƒ ì§„í–‰ë¶ˆê°€ëŠ¥í•œ ìƒí™©ì„ì„ í™•ì¸
 
 		for (int i = 1; i <= N; i++) {
 
 			int n = 1 << (i - 1);
-			if (cur_stat & n)//ÀÌ¹Ì i ³ëµå¸¦ ¹æ¹®ÇÑ °æ¿ì
+			if (cur_stat & n)//ì´ë¯¸ i ë…¸ë“œë¥¼ ë°©ë¬¸í•œ ê²½ìš°
 				continue;
-			else if (W[cur_pos][i] == 0)//i ³ëµå·Î °¡´Â ±æÀÌ ¾ø´Â°æ¿ì
+			else if (W[cur_pos][i] == 0)//i ë…¸ë“œë¡œ ê°€ëŠ” ê¸¸ì´ ì—†ëŠ”ê²½ìš°
 				continue;
 
 			int temp = dfs(i, cur_stat | n);
-			if (temp == -1)//i³ëµå·Î °£ µÚ ´õÀÌ»ó ÁøÇàÀÌ¾ÈµÇ´Â °æ¿ì
+			if (temp == -1)//ië…¸ë“œë¡œ ê°„ ë’¤ ë”ì´ìƒ ì§„í–‰ì´ì•ˆë˜ëŠ” ê²½ìš°
 				continue;
 			else {
 				check_block = false;

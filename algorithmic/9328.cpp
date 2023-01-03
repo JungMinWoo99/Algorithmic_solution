@@ -100,12 +100,12 @@ public:
 	bool imp_cell(int n, int m) {
 		
 		if (out_of_boundary(n, m))
-			return false;//¹æ¹®ÇÏÁö ¸øÇÏ¸é false ¹ÝÈ¯
+			return false;//ë°©ë¬¸í•˜ì§€ ëª»í•˜ë©´ false ë°˜í™˜
 		else if (grid[n][m] == '_' || grid[n][m] == '*')
 			return false;
 		else if (grid[n][m] == '.') {
 			visit_cell(n, m);
-			return true;//¹æ¹®Çß´Ù¸é true ¹ÝÈ¯
+			return true;//ë°©ë¬¸í–ˆë‹¤ë©´ true ë°˜í™˜
 		}
 		else if (grid[n][m] == '$') {
 			doc++;

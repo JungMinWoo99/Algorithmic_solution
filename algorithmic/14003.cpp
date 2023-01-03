@@ -5,7 +5,7 @@
 
 using namespace std;
 
-//typedef pair<int, Node*> Node;//Àç±ÍÀû ÀÚ·áÇüÀÌ Á¤ÀÇµÊ
+//typedef pair<int, Node*> Node;//ì¬ê·€ì  ìë£Œí˜•ì´ ì •ì˜ë¨
 class Node {
 public:
 	int first;
@@ -52,7 +52,7 @@ int main(void) {
 		}
 		else if (stack_vector.size() > 1) {
 
-			//ÀÌÁø Å½»ö
+			//ì´ì§„ íƒìƒ‰
 
 			int start = 0;
 			int end = stack_vector.size() - 1;
@@ -83,7 +83,7 @@ int main(void) {
 	}
 
 	/*
-	* ½ºÅÃ È®ÀÎ ÄÚµå
+	* ìŠ¤íƒ í™•ì¸ ì½”ë“œ
 	cout << stack_vector.size()<<'\n';
 	for (int i = stack_vector.size()-1; i > -1; i--) {
 		while (!stack_vector[i]->empty()) {

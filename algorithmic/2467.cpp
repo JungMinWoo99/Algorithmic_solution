@@ -5,10 +5,10 @@
 using namespace std;
 
 /*
-* 1,¸ðµÎ ¾ç¼ö ¶Ç´Â ¸ðµÎ À½¼ö ÀÏ °æ¿ì
-*	°¡Àå ÀÛÀº µÎ °ªÀÌ Á¤´ä
+* 1,ëª¨ë‘ ì–‘ìˆ˜ ë˜ëŠ” ëª¨ë‘ ìŒìˆ˜ ì¼ ê²½ìš°
+*	ê°€ìž¥ ìž‘ì€ ë‘ ê°’ì´ ì •ë‹µ
 * 
-* 2,¾ç¼ö¿Í À½¼ö¿Í ¸ðµÎ Á¸ÀçÇÏ´Â °æ¿ì
+* 2,ì–‘ìˆ˜ì™€ ìŒìˆ˜ì™€ ëª¨ë‘ ì¡´ìž¬í•˜ëŠ” ê²½ìš°
 * 
 * 
 */
@@ -18,8 +18,8 @@ int main() {
 	cin.tie(NULL);
 	cout.tie(NULL);
 
-	vector<int> n_value;//À½¼ö °ª ÀúÀå º¤ÅÍ
-	vector<int> p_value;//¾ç¼ö °ª ÀúÀå º¤ÅÍ
+	vector<int> n_value;//ìŒìˆ˜ ê°’ ì €ìž¥ ë²¡í„°
+	vector<int> p_value;//ì–‘ìˆ˜ ê°’ ì €ìž¥ ë²¡í„°
 	
 	int i;
 	cin >> i;
@@ -33,15 +33,15 @@ int main() {
 			n_value.push_back(x);
 	}
 
-	//Á¤´äÀº ¿À¸§Â÷¼øÀ¸·Î
+	//ì •ë‹µì€ ì˜¤ë¦„ì°¨ìˆœìœ¼ë¡œ
 	int answer1;
 	int answer2;
 	int min_sum;
 
-	//ÃÊ±â °ª ¼¼ÆÃ
-	if (p_value.size() > 0 && n_value.size() > 0) {// ¾ç¼ö¿Í À½¼ö°¡ ¸ðµÎ ÀÖ´Â °æ¿ì
-		if (p_value.size() > 1 && n_value.size() > 1) {//¾ç¼ö¿Í À½¼ö ¸ðµÎ 2°³ ÀÌ»ó ÀÖ´Â °æ¿ì
-			//°¡Àå ÀÛÀº µÎ ¾ç¼öÀÇ ÇÕÀÇ Å©±â¿Í °¡Àå Å« µÎ À½¼öÀÇ ÇÕÀÇ Å©±â¸¦ ºñ±³ÇÏ¿© ÃÊ±â ºñ±³°ª ¼³Á¤
+	//ì´ˆê¸° ê°’ ì„¸íŒ…
+	if (p_value.size() > 0 && n_value.size() > 0) {// ì–‘ìˆ˜ì™€ ìŒìˆ˜ê°€ ëª¨ë‘ ìžˆëŠ” ê²½ìš°
+		if (p_value.size() > 1 && n_value.size() > 1) {//ì–‘ìˆ˜ì™€ ìŒìˆ˜ ëª¨ë‘ 2ê°œ ì´ìƒ ìžˆëŠ” ê²½ìš°
+			//ê°€ìž¥ ìž‘ì€ ë‘ ì–‘ìˆ˜ì˜ í•©ì˜ í¬ê¸°ì™€ ê°€ìž¥ í° ë‘ ìŒìˆ˜ì˜ í•©ì˜ í¬ê¸°ë¥¼ ë¹„êµí•˜ì—¬ ì´ˆê¸° ë¹„êµê°’ ì„¤ì •
 			if (p_value[0] + p_value[1] < -n_value[n_value.size() - 1] - n_value[n_value.size() - 2]) {
 				answer1 = p_value[0];
 				answer2 = p_value[1];
@@ -53,45 +53,45 @@ int main() {
 				min_sum = -n_value[n_value.size() - 1] - n_value[n_value.size() - 2];
 			}
 		}
-		else if(n_value.size() == 1&& p_value.size() == 1) {//¿ø¼Ò°¡ ¾ç¼ö À½¼ö °¢°¢ 1°³ÀÎ °æ¿ì
+		else if(n_value.size() == 1&& p_value.size() == 1) {//ì›ì†Œê°€ ì–‘ìˆ˜ ìŒìˆ˜ ê°ê° 1ê°œì¸ ê²½ìš°
 			answer1 = n_value[0];
 			answer2 = p_value[0];
 			min_sum = p_value[0] - n_value[0];
 		}
-		else if (n_value.size() == 1) {//À½¼ö°¡ 1°³¸¸ ÀÖ´Â °æ¿ì
+		else if (n_value.size() == 1) {//ìŒìˆ˜ê°€ 1ê°œë§Œ ìžˆëŠ” ê²½ìš°
 			answer1 = p_value[0];
 			answer2 = p_value[1];
 			min_sum = p_value[0] + p_value[1];
 		}
-		else if(p_value.size() == 1) {//¾ç¼ö°¡ 1°³¸¸ ÀÖ´Â °æ¿ì
+		else if(p_value.size() == 1) {//ì–‘ìˆ˜ê°€ 1ê°œë§Œ ìžˆëŠ” ê²½ìš°
 			answer1 = n_value[n_value.size() - 2];
 			answer2 = n_value[n_value.size() - 1];
 			min_sum = -n_value[n_value.size() - 1] - n_value[n_value.size() - 2];
 		}
 	}
-	else if (n_value.size()==0) {//¾ç¼ö¸¸ Á¸ÀçÇÏ´Â °æ¿ì
+	else if (n_value.size()==0) {//ì–‘ìˆ˜ë§Œ ì¡´ìž¬í•˜ëŠ” ê²½ìš°
 		answer1 = p_value[0];
 		answer2 = p_value[1];
 		min_sum = p_value[0] + p_value[1];
 	}
-	else if (p_value.size() == 0) {//À½¼ö¸¸ Á¸ÀçÇÏ´Â °æ¿ì
+	else if (p_value.size() == 0) {//ìŒìˆ˜ë§Œ ì¡´ìž¬í•˜ëŠ” ê²½ìš°
 		answer1 = n_value[n_value.size() - 2];
 		answer2 = n_value[n_value.size() - 1];
 		min_sum = -n_value[n_value.size() - 1] - n_value[n_value.size() - 2];
 	}
 
-	//ºÎÈ£°¡ ´Ù¸¥ µÎ °ª¿¡ ´ëÇØ Æ¯¼º°ªÀ» °è»êÇÏ¿© ÃÖ¼Ò°ª ±¸ÇÏ±â
-	//n¹øÂ° ¼ö¿Í n-1¹øÂ° ¼öÀÇ Áß¾Ó°ªÀ» ±âÁØÀ¸·Î ´õÇÏ´Â °ªÀÇ Àý´ë°ªÀÌ Áß¾Ó°ªÀ» ³Ñ¾î°¡¸é n-1¹øÂ°¼ö·Î ³Ñ¾î°¡°Ô ÇÏ±â
-	if (p_value.size() > 0 && n_value.size() > 0) {//ÃÖ¼ÒÇÑ °¢ º¤ÅÍ¿¡ 1°³ ÀÌ»óÀÇ ¿ø¼Ò°¡ ÀÖ¾î¾ßµÊ
+	//ë¶€í˜¸ê°€ ë‹¤ë¥¸ ë‘ ê°’ì— ëŒ€í•´ íŠ¹ì„±ê°’ì„ ê³„ì‚°í•˜ì—¬ ìµœì†Œê°’ êµ¬í•˜ê¸°
+	//në²ˆì§¸ ìˆ˜ì™€ n-1ë²ˆì§¸ ìˆ˜ì˜ ì¤‘ì•™ê°’ì„ ê¸°ì¤€ìœ¼ë¡œ ë”í•˜ëŠ” ê°’ì˜ ì ˆëŒ€ê°’ì´ ì¤‘ì•™ê°’ì„ ë„˜ì–´ê°€ë©´ n-1ë²ˆì§¸ìˆ˜ë¡œ ë„˜ì–´ê°€ê²Œ í•˜ê¸°
+	if (p_value.size() > 0 && n_value.size() > 0) {//ìµœì†Œí•œ ê° ë²¡í„°ì— 1ê°œ ì´ìƒì˜ ì›ì†Œê°€ ìžˆì–´ì•¼ë¨
 		int n = 0;
 		int p = p_value.size() - 1;
 		while (1) {
 
 			int mid;
-			if (p != 0&&p_value.size()!=1)//-1¿¡ Á¢±ÙÇÏ¸é ¾ÈµÊ
+			if (p != 0&&p_value.size()!=1)//-1ì— ì ‘ê·¼í•˜ë©´ ì•ˆë¨
 				mid = (p_value[p] + p_value[p - 1]) / 2;
 			else
-				mid = 0;//¾Æ·¡ ¹Ýº¹¹®ÀÌ À½¼ö¸¦ ³¡±îÁö Á¢±ÙÇØ¾ß ³¡³ªµµ·Ï ÇÔ
+				mid = 0;//ì•„ëž˜ ë°˜ë³µë¬¸ì´ ìŒìˆ˜ë¥¼ ëê¹Œì§€ ì ‘ê·¼í•´ì•¼ ëë‚˜ë„ë¡ í•¨
 
 			while (mid < -n_value[n]) {
 				if (abs(p_value[p] + n_value[n]) < min_sum) {
@@ -99,12 +99,12 @@ int main() {
 					answer2 = p_value[p];
 					min_sum = abs(p_value[p] + n_value[n]);
 				}
-				if (n != n_value.size() - 1)//nÀÌ º¤ÅÍ ³¡±îÁö °£ °ÍÀÌ ¾Æ´Ï¶ó¸é ´ÙÀ½ ¿ø¼Ò¿¡ Á¢±Ù
+				if (n != n_value.size() - 1)//nì´ ë²¡í„° ëê¹Œì§€ ê°„ ê²ƒì´ ì•„ë‹ˆë¼ë©´ ë‹¤ìŒ ì›ì†Œì— ì ‘ê·¼
 					n++;
 				else
 					break;
 			}
-			if (p != 0)//p°¡ º¤ÅÍ ³¡±îÁö °£ °ÍÀÌ ¾Æ´Ï¶ó¸é ´ÙÀ½ ¿ø¼Ò¿¡ Á¢±Ù
+			if (p != 0)//pê°€ ë²¡í„° ëê¹Œì§€ ê°„ ê²ƒì´ ì•„ë‹ˆë¼ë©´ ë‹¤ìŒ ì›ì†Œì— ì ‘ê·¼
 				p--;
 			else
 				break;

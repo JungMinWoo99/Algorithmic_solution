@@ -4,9 +4,9 @@
 using namespace std;
 
 /*
-* »ç¿ë ¾Ë°í¸®Áò
-* Å©·ç½ºÄ® ¾Ë°í¸®Áò
-* »çÀÌÅ¬ °ËÃâ-¼­·Î¼öÁıÇÕ(Disjoint Set)¿¡¼­ ÇÕÁıÇÕ Ã£±â(union-find)
+* ì‚¬ìš© ì•Œê³ ë¦¬ì¦˜
+* í¬ë£¨ìŠ¤ì¹¼ ì•Œê³ ë¦¬ì¦˜
+* ì‚¬ì´í´ ê²€ì¶œ-ì„œë¡œìˆ˜ì§‘í•©(Disjoint Set)ì—ì„œ í•©ì§‘í•© ì°¾ê¸°(union-find)
 */
 
 bool compare(const pair<pair<int, int>, int>& a, pair<pair<int, int>, int>& b) {
@@ -22,17 +22,17 @@ int main() {
 	cout.tie(NULL);
 
 	int answer = 0;
-	list<pair<pair<int, int>, int>> edge;//µÎ ³ëµå, °£¼±ÀÇ °¡ÁßÄ¡¸¦ ÀúÀåÇÏ´Â º¤ÅÍ
-	int* c_check_table;//»çÀÌÅ¬ Ã¼Å© Å×ÀÌºí(·çÆ® ³ëµåÀ§Ä¡¸¦ ÀúÀå)
+	list<pair<pair<int, int>, int>> edge;//ë‘ ë…¸ë“œ, ê°„ì„ ì˜ ê°€ì¤‘ì¹˜ë¥¼ ì €ì¥í•˜ëŠ” ë²¡í„°
+	int* c_check_table;//ì‚¬ì´í´ ì²´í¬ í…Œì´ë¸”(ë£¨íŠ¸ ë…¸ë“œìœ„ì¹˜ë¥¼ ì €ì¥)
 	int n_num,e_num;
 	cin >> n_num >>e_num;
 
-	c_check_table = new int[n_num+1];//³ëµå °¹¼ö ¸¸Å­ ÇÒ´ç
-	for (int i = 0; i < n_num+1; i++) {//Å×ÀÌºí ±âº»°ª ¼¼ÆÃ
-		c_check_table[i] = i;//¼¿ÇÁ ·çÇÁÇÏ´Â Æ®¸®°¡ ÃÊ±â ¼¼ÆÃ
+	c_check_table = new int[n_num+1];//ë…¸ë“œ ê°¯ìˆ˜ ë§Œí¼ í• ë‹¹
+	for (int i = 0; i < n_num+1; i++) {//í…Œì´ë¸” ê¸°ë³¸ê°’ ì„¸íŒ…
+		c_check_table[i] = i;//ì…€í”„ ë£¨í”„í•˜ëŠ” íŠ¸ë¦¬ê°€ ì´ˆê¸° ì„¸íŒ…
 	}
 
-	for (int i = 0; i < e_num; i++) {//¿§Áö º¤ÅÍ Ã¤¿ì±â
+	for (int i = 0; i < e_num; i++) {//ì—£ì§€ ë²¡í„° ì±„ìš°ê¸°
 		int a, b, c;
 		cin >> a >> b >> c;
 		edge.push_back(make_pair(make_pair(a, b), c));
@@ -48,15 +48,15 @@ int main() {
 		int root2 = n2;
 		do {
 			root1 = c_check_table[root1];
-		} while (c_check_table[root1] != root1);//¼¿ÇÁ ·çÇÁ°¡ µÇ´Â ·çÆ® ³ëµå¿¡ µµ´Ş ÇÒ¶§±îÁö ¹İº¹
-		c_check_table[n1] = root1;//·çÆ® ³ëµå °»½Å
+		} while (c_check_table[root1] != root1);//ì…€í”„ ë£¨í”„ê°€ ë˜ëŠ” ë£¨íŠ¸ ë…¸ë“œì— ë„ë‹¬ í• ë•Œê¹Œì§€ ë°˜ë³µ
+		c_check_table[n1] = root1;//ë£¨íŠ¸ ë…¸ë“œ ê°±ì‹ 
 		do {
 			root2 = c_check_table[root2];
-		} while (c_check_table[root2] != root2);//¼¿ÇÁ ·çÇÁ°¡ µÇ´Â ·çÆ® ³ëµå¿¡ µµ´Ş ÇÒ¶§±îÁö ¹İº¹
-		c_check_table[n2] = root2;//·çÆ® ³ëµå °»½Å
-		if (root1 != root2) {//»çÀÌÅ¬ÀÌ Çü¼ºµÇÁö ¾Ê´Â°æ¿ì
+		} while (c_check_table[root2] != root2);//ì…€í”„ ë£¨í”„ê°€ ë˜ëŠ” ë£¨íŠ¸ ë…¸ë“œì— ë„ë‹¬ í• ë•Œê¹Œì§€ ë°˜ë³µ
+		c_check_table[n2] = root2;//ë£¨íŠ¸ ë…¸ë“œ ê°±ì‹ 
+		if (root1 != root2) {//ì‚¬ì´í´ì´ í˜•ì„±ë˜ì§€ ì•ŠëŠ”ê²½ìš°
 			answer += e_val;
-			c_check_table[root1] = root2;//µ¶¸³µÈ µÎ Æ®¸®¸¦ ¿¬°á
+			c_check_table[root1] = root2;//ë…ë¦½ëœ ë‘ íŠ¸ë¦¬ë¥¼ ì—°ê²°
 			e_count++;
 		}
 		edge.pop_front();

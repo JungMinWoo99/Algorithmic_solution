@@ -4,49 +4,49 @@
 using namespace std;
 
 /*
-* »ç¿ë ¾Ë°í¸®Áò
+* ì‚¬ìš© ì•Œê³ ë¦¬ì¦˜
 */
 
 int arr[9][9];
 
-vector<pair<int, int>> track;//º¯°æÇÑ ¹è¿­À§Ä¡¸¦ ¼ø¼­´ë·Î ÀúÀåÇÏ´Â ¸®½ºÆ®(°ªÀ» Ãß°¡ÇÒ ¼ö ¾ø´Â °æ¿ì ¿ª¼øÀ¸·Î ¿Ã¶ó°¡¸ç ´Ù½Ã °ªÀ» ¹Ù²Þ)
+vector<pair<int, int>> track;//ë³€ê²½í•œ ë°°ì—´ìœ„ì¹˜ë¥¼ ìˆœì„œëŒ€ë¡œ ì €ìž¥í•˜ëŠ” ë¦¬ìŠ¤íŠ¸(ê°’ì„ ì¶”ê°€í•  ìˆ˜ ì—†ëŠ” ê²½ìš° ì—­ìˆœìœ¼ë¡œ ì˜¬ë¼ê°€ë©° ë‹¤ì‹œ ê°’ì„ ë°”ê¿ˆ)
 
 bool col_check(int col) {
-	bool table[10] = {false};//ÇÑ¹ø È®ÀÎµÈ °ªÀº ÂüÀ¸·Î ÀúÀå
+	bool table[10] = {false};//í•œë²ˆ í™•ì¸ëœ ê°’ì€ ì°¸ìœ¼ë¡œ ì €ìž¥
 	for (int i = 0; i < 9; i++) {
-		if (table[arr[col][i]])//ÀÌ¹Ì È®ÀÎµÈ °ªÀÌ ¶Ç È®ÀÎµÈ°æ¿ì
+		if (table[arr[col][i]])//ì´ë¯¸ í™•ì¸ëœ ê°’ì´ ë˜ í™•ì¸ëœê²½ìš°
 			return false;
-		else//Ã³À½ È®ÀÎµÈ °ªÀÎ °æ¿ì
+		else//ì²˜ìŒ í™•ì¸ëœ ê°’ì¸ ê²½ìš°
 			table[arr[col][i]] = true;
-		table[0] = false;//0Àº ¾ÆÁ÷ Á¤ÇØÁø °ªÀÌ ¾Æ´Ï¶ó´Â ¶æÀÌ±â ¶§¹®¿¡ Áßº¹À¸·Î È®ÀÎµÇµµ µÊ
+		table[0] = false;//0ì€ ì•„ì§ ì •í•´ì§„ ê°’ì´ ì•„ë‹ˆë¼ëŠ” ëœ»ì´ê¸° ë•Œë¬¸ì— ì¤‘ë³µìœ¼ë¡œ í™•ì¸ë˜ë„ ë¨
 	}
-	return true;//Áßº¹µÈ °ªÀÌ ÇÏ³ªµµ ¾ø´Â °æ¿ì
+	return true;//ì¤‘ë³µëœ ê°’ì´ í•˜ë‚˜ë„ ì—†ëŠ” ê²½ìš°
 }
 
 bool row_check(int row) {
-	bool table[10] = { false };//ÇÑ¹ø È®ÀÎµÈ °ªÀº ÂüÀ¸·Î ÀúÀå
+	bool table[10] = { false };//í•œë²ˆ í™•ì¸ëœ ê°’ì€ ì°¸ìœ¼ë¡œ ì €ìž¥
 	for (int i = 0; i < 9; i++) {
-		if (table[arr[i][row]])//ÀÌ¹Ì È®ÀÎµÈ °ªÀÌ ¶Ç È®ÀÎµÈ°æ¿ì
+		if (table[arr[i][row]])//ì´ë¯¸ í™•ì¸ëœ ê°’ì´ ë˜ í™•ì¸ëœê²½ìš°
 			return false;
-		else//Ã³À½ È®ÀÎµÈ °ªÀÎ °æ¿ì
+		else//ì²˜ìŒ í™•ì¸ëœ ê°’ì¸ ê²½ìš°
 			table[arr[i][row]] = true;
-		table[0] = false;//0Àº ¾ÆÁ÷ Á¤ÇØÁø °ªÀÌ ¾Æ´Ï¶ó´Â ¶æÀÌ±â ¶§¹®¿¡ Áßº¹À¸·Î È®ÀÎµÇµµ µÊ
+		table[0] = false;//0ì€ ì•„ì§ ì •í•´ì§„ ê°’ì´ ì•„ë‹ˆë¼ëŠ” ëœ»ì´ê¸° ë•Œë¬¸ì— ì¤‘ë³µìœ¼ë¡œ í™•ì¸ë˜ë„ ë¨
 	}
-	return true;//Áßº¹µÈ °ªÀÌ ÇÏ³ªµµ ¾ø´Â °æ¿ì
+	return true;//ì¤‘ë³µëœ ê°’ì´ í•˜ë‚˜ë„ ì—†ëŠ” ê²½ìš°
 }
 
-bool cell_check(int col, int row) {//colÇà row¿­ÀÇ ¼¿¿¡ ´ëÇØ Áßº¹°ª °Ë»ç
-	bool table[10] = { false };//ÇÑ¹ø È®ÀÎµÈ °ªÀº ÂüÀ¸·Î ÀúÀå
+bool cell_check(int col, int row) {//colí–‰ rowì—´ì˜ ì…€ì— ëŒ€í•´ ì¤‘ë³µê°’ ê²€ì‚¬
+	bool table[10] = { false };//í•œë²ˆ í™•ì¸ëœ ê°’ì€ ì°¸ìœ¼ë¡œ ì €ìž¥
 	for (int n = col*3; n < (col+1)*3; n++) {
 		for (int m = row*3; m < (row + 1) * 3; m++) {
-			if (table[arr[n][m]])//ÀÌ¹Ì È®ÀÎµÈ °ªÀÌ ¶Ç È®ÀÎµÈ°æ¿ì
+			if (table[arr[n][m]])//ì´ë¯¸ í™•ì¸ëœ ê°’ì´ ë˜ í™•ì¸ëœê²½ìš°
 				return false;
-			else//Ã³À½ È®ÀÎµÈ °ªÀÎ °æ¿ì
+			else//ì²˜ìŒ í™•ì¸ëœ ê°’ì¸ ê²½ìš°
 				table[arr[n][m]] = true;
-			table[0] = false;//0Àº ¾ÆÁ÷ Á¤ÇØÁø °ªÀÌ ¾Æ´Ï¶ó´Â ¶æÀÌ±â ¶§¹®¿¡ Áßº¹À¸·Î È®ÀÎµÇµµ µÊ
+			table[0] = false;//0ì€ ì•„ì§ ì •í•´ì§„ ê°’ì´ ì•„ë‹ˆë¼ëŠ” ëœ»ì´ê¸° ë•Œë¬¸ì— ì¤‘ë³µìœ¼ë¡œ í™•ì¸ë˜ë„ ë¨
 		}
 	}
-	return true;//Áßº¹µÈ °ªÀÌ ÇÏ³ªµµ ¾ø´Â °æ¿ì
+	return true;//ì¤‘ë³µëœ ê°’ì´ í•˜ë‚˜ë„ ì—†ëŠ” ê²½ìš°
 }
 
 bool all_check(int col, int row) {
@@ -70,20 +70,20 @@ int main() {
 			scanf_s("%1d", &input);
 			arr[n][m] = input;
 			if (input == 0)
-				track.push_back(make_pair(n, m));//°ªÀ» Ã¤¿ö¾ßÇÒ Ä­ÀÇ À§Ä¡¸¦ ÀúÀå
+				track.push_back(make_pair(n, m));//ê°’ì„ ì±„ì›Œì•¼í•  ì¹¸ì˜ ìœ„ì¹˜ë¥¼ ì €ìž¥
 		}
 	}
 
-	int iter = 0;//trackÀÇ ¾ç¹æÇâ ¹Ýº¹ÀÚÃ³·³ ¾µ º¯¼ö
-	while (iter!=track.size()) {//ºóÄ­À» ¸ðµÎ Ã¤¿ì¸é ³¡
+	int iter = 0;//trackì˜ ì–‘ë°©í–¥ ë°˜ë³µìžì²˜ëŸ¼ ì“¸ ë³€ìˆ˜
+	while (iter!=track.size()) {//ë¹ˆì¹¸ì„ ëª¨ë‘ ì±„ìš°ë©´ ë
 		++arr[track[iter].first][track[iter].second]%=10;
-		if (!(arr[track[iter].first][track[iter].second] == 0)) {//0ÀÌ ´ëÀÔµÇÁö ¾ÊÀº °æ¿ì
-			if (all_check(track[iter].first, track[iter].second))//´ëÀÔµÈ °ªÀÌ Áßº¹ÀÌ ¾Æ´Ò°æ¿ì
+		if (!(arr[track[iter].first][track[iter].second] == 0)) {//0ì´ ëŒ€ìž…ë˜ì§€ ì•Šì€ ê²½ìš°
+			if (all_check(track[iter].first, track[iter].second))//ëŒ€ìž…ëœ ê°’ì´ ì¤‘ë³µì´ ì•„ë‹ê²½ìš°
 				iter++;
 			else
-				continue;//Áßº¹ÀÎ °æ¿ì ´ÙÀ½°ª ´ëÀÔ
+				continue;//ì¤‘ë³µì¸ ê²½ìš° ë‹¤ìŒê°’ ëŒ€ìž…
 		}
-		else //0ÀÌ ´ëÀÔµÈ °æ¿ì(1~9±îÁö ÇöÀç °¡´ÉÇÑ °ªÀÌ ¾ø´Ù´Â ¶æ)
+		else //0ì´ ëŒ€ìž…ëœ ê²½ìš°(1~9ê¹Œì§€ í˜„ìž¬ ê°€ëŠ¥í•œ ê°’ì´ ì—†ë‹¤ëŠ” ëœ»)
 			iter--;
 	}
 

@@ -6,7 +6,7 @@
 using namespace std;
 
 bool compare_dia(pair<int, int> comp1, pair<int, int> comp2) {
-	return comp1.first > comp2.first;//무게 기준 내림차순 정렬
+	return comp1.first > comp2.first;//???? ???? ???????? ????
 }
 
 bool compare_sack(int comp1, int comp2) {
@@ -42,7 +42,7 @@ int main(void) {
 
 	sort(dia.begin(), dia.end(), compare_dia);
 
-	while (!(sack.empty())) {//가방이 다 떨어질때까지
+	while (!(sack.empty())) {//?????? ?? ????????????
 		while (sack.back() >= dia.back().first) {
 			if (dia.empty())
 				break;

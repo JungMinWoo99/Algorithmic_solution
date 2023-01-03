@@ -35,7 +35,7 @@ int main(void) {
 		}
 		else if (p_arr.size() > 1) {
 
-			//ÀÌÁø Å½»ö
+			//Ã€ÃŒÃÃ¸ Ã…Â½Â»Ã¶
 
 			int start = 0;
 			int end = p_arr.size() - 1;

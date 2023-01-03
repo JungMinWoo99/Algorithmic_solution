@@ -30,48 +30,48 @@ public:
 	}
 
 private:
-	int val=-1;//ÇØ´ç ³ëµåÀÇ °ª
-	int cul_num = 0;//¿¬»êÈ½¼ö
-	Node* pre_node = nullptr;//¿¬»êÁ÷Àü¿¡ ÀÖ´ø ³ëµå
+	int val=-1;//í•´ë‹¹ ë…¸ë“œì˜ ê°’
+	int cul_num = 0;//ì—°ì‚°íšŸìˆ˜
+	Node* pre_node = nullptr;//ì—°ì‚°ì§ì „ì— ìˆë˜ ë…¸ë“œ
 };
 
 Node arr[1000001];
 
-void link_all_node(int start) {//µ¿Àû ÇÁ·Î±×·¡¹ÖÀ» ÅëÇØ ¹®Á¦¸¦ ÇØ°áÇÏ´Â ÇÔ¼ö
-	list<Node*> n_buffer;//´ÙÀ½¿¡ Ã³¸®ÇÒ ³ëµå¸¦ ÀúÀåÇÑ ´ë±â¿­ ¹öÆÛ
+void link_all_node(int start) {//ë™ì  í”„ë¡œê·¸ë˜ë°ì„ í†µí•´ ë¬¸ì œë¥¼ í•´ê²°í•˜ëŠ” í•¨ìˆ˜
+	list<Node*> n_buffer;//ë‹¤ìŒì— ì²˜ë¦¬í•  ë…¸ë“œë¥¼ ì €ì¥í•œ ëŒ€ê¸°ì—´ ë²„í¼
 	n_buffer.push_back(&arr[start]);
 
 	for (Node* node = n_buffer.front(); node != &arr[1]; node = n_buffer.front()) {
-		n_buffer.pop_front();//°¡Àå ¾ÕÀÇ ¿ø¼Ò »©±â
+		n_buffer.pop_front();//ê°€ì¥ ì•ì˜ ì›ì†Œ ë¹¼ê¸°
 		int val = node->get_val();
 
-		if (val % 3 == 0) {//3ÀÇ ¹è¼öÀÎ °æ¿ì
-			if (arr[val / 3].get_pre_node() == nullptr) {//¾ÆÁ÷ ¿¬°áµÈ ³ëµå°¡ ¾ø´Â °æ¿ì¸¸ ¿¬°á°¡´É(ÀÌ¹Ì ¿¬°áµÇÀÖ´Ù¸é ÃÖ¼Ò ·çÆ®°¡ ¾Æ´Ñ°ÍÀÓ)
-				arr[val / 3].set_pre_node(node);//³ëµå ¿¬°á
-				arr[val / 3].set_cul_num(node->get_cul_num() + 1);//ÃÖ¼Ò°ª ´ëÀÔ
-				n_buffer.push_back(&arr[val / 3]);//Å½»öÇÒ ³ëµå ¹öÆÛ¿¡ ÀúÀå
+		if (val % 3 == 0) {//3ì˜ ë°°ìˆ˜ì¸ ê²½ìš°
+			if (arr[val / 3].get_pre_node() == nullptr) {//ì•„ì§ ì—°ê²°ëœ ë…¸ë“œê°€ ì—†ëŠ” ê²½ìš°ë§Œ ì—°ê²°ê°€ëŠ¥(ì´ë¯¸ ì—°ê²°ë˜ìˆë‹¤ë©´ ìµœì†Œ ë£¨íŠ¸ê°€ ì•„ë‹Œê²ƒì„)
+				arr[val / 3].set_pre_node(node);//ë…¸ë“œ ì—°ê²°
+				arr[val / 3].set_cul_num(node->get_cul_num() + 1);//ìµœì†Œê°’ ëŒ€ì…
+				n_buffer.push_back(&arr[val / 3]);//íƒìƒ‰í•  ë…¸ë“œ ë²„í¼ì— ì €ì¥
 			}
 		}
 
-		if (val % 2 == 0) {//3ÀÇ ¹è¼öÀÎ °æ¿ì
-			if (arr[val / 2].get_pre_node() == nullptr) {//¾ÆÁ÷ ¿¬°áµÈ ³ëµå°¡ ¾ø´Â °æ¿ì¸¸ ¿¬°á°¡´É(ÀÌ¹Ì ¿¬°áµÇÀÖ´Ù¸é ÃÖ¼Ò ·çÆ®°¡ ¾Æ´Ñ°ÍÀÓ)
-				arr[val / 2].set_pre_node(node);//³ëµå ¿¬°á
-				arr[val / 2].set_cul_num(node->get_cul_num() + 1);//ÃÖ¼Ò°ª ´ëÀÔ
-				n_buffer.push_back(&arr[val / 2]);//Å½»öÇÒ ³ëµå ¹öÆÛ¿¡ ÀúÀå
+		if (val % 2 == 0) {//3ì˜ ë°°ìˆ˜ì¸ ê²½ìš°
+			if (arr[val / 2].get_pre_node() == nullptr) {//ì•„ì§ ì—°ê²°ëœ ë…¸ë“œê°€ ì—†ëŠ” ê²½ìš°ë§Œ ì—°ê²°ê°€ëŠ¥(ì´ë¯¸ ì—°ê²°ë˜ìˆë‹¤ë©´ ìµœì†Œ ë£¨íŠ¸ê°€ ì•„ë‹Œê²ƒì„)
+				arr[val / 2].set_pre_node(node);//ë…¸ë“œ ì—°ê²°
+				arr[val / 2].set_cul_num(node->get_cul_num() + 1);//ìµœì†Œê°’ ëŒ€ì…
+				n_buffer.push_back(&arr[val / 2]);//íƒìƒ‰í•  ë…¸ë“œ ë²„í¼ì— ì €ì¥
 			}
 		}
 
-		if (1) {// -1À»ÇÑ °æ¿ì
-			if (arr[val - 1].get_pre_node() == nullptr) {//¾ÆÁ÷ ¿¬°áµÈ ³ëµå°¡ ¾ø´Â °æ¿ì¸¸ ¿¬°á°¡´É(ÀÌ¹Ì ¿¬°áµÇÀÖ´Ù¸é ÃÖ¼Ò ·çÆ®°¡ ¾Æ´Ñ°ÍÀÓ)
-				arr[val - 1].set_pre_node(node);//³ëµå ¿¬°á
-				arr[val - 1].set_cul_num(node->get_cul_num() + 1);//ÃÖ¼Ò°ª ´ëÀÔ
-				n_buffer.push_back(&arr[val - 1]);//Å½»öÇÒ ³ëµå ¹öÆÛ¿¡ ÀúÀå
+		if (1) {// -1ì„í•œ ê²½ìš°
+			if (arr[val - 1].get_pre_node() == nullptr) {//ì•„ì§ ì—°ê²°ëœ ë…¸ë“œê°€ ì—†ëŠ” ê²½ìš°ë§Œ ì—°ê²°ê°€ëŠ¥(ì´ë¯¸ ì—°ê²°ë˜ìˆë‹¤ë©´ ìµœì†Œ ë£¨íŠ¸ê°€ ì•„ë‹Œê²ƒì„)
+				arr[val - 1].set_pre_node(node);//ë…¸ë“œ ì—°ê²°
+				arr[val - 1].set_cul_num(node->get_cul_num() + 1);//ìµœì†Œê°’ ëŒ€ì…
+				n_buffer.push_back(&arr[val - 1]);//íƒìƒ‰í•  ë…¸ë“œ ë²„í¼ì— ì €ì¥
 			}
 		}
 	}
 }
 
-void print_answer(int i) {//±×³É Çü½Ä¿¡ ¸Â°Ô ´äÀ» Ãâ·ÂÇÏ´Â ÇÔ¼ö
+void print_answer(int i) {//ê·¸ëƒ¥ í˜•ì‹ì— ë§ê²Œ ë‹µì„ ì¶œë ¥í•˜ëŠ” í•¨ìˆ˜
 	list<int> answer;
 	answer.push_back(arr[1].get_cul_num());
 	for (Node* node = &arr[1]; node->get_cul_num() != 0; node = node->get_pre_node())
