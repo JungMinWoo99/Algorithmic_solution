@@ -42,8 +42,6 @@ int main(void)
 
 	cout << answer<<endl;
 
-	system("pause");
-
 	return 0;
 }
 
