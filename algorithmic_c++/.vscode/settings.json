@@ -10,6 +10,13 @@
         "cmath": "cpp",
         "deque": "cpp",
         "vector": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "unordered_map": "cpp",
+        "format": "cpp",
+        "initializer_list": "cpp",
+        "span": "cpp",
+        "text_encoding": "cpp",
+        "bitset": "cpp",
+        "functional": "cpp"
     }
 }
