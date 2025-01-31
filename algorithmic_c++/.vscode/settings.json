@@ -10,6 +10,21 @@
         "cmath": "cpp",
         "deque": "cpp",
         "vector": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "utility": "cpp",
+        "xutility": "cpp",
+        "xiosbase": "cpp",
+        "stack": "cpp",
+        "climits": "cpp",
+        "format": "cpp",
+        "xstring": "cpp",
+        "queue": "cpp",
+        "initializer_list": "cpp",
+        "xtree": "cpp",
+        "functional": "cpp",
+        "xlocale": "cpp",
+        "algorithm": "cpp",
+        "limits": "cpp",
+        "xhash": "cpp"
     }
 }
