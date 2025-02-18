@@ -1,8 +1,0 @@
-{
-    "files.associations": {
-        "*.ipp": "cpp",
-        "queue": "cpp",
-        "deque": "cpp",
-        "vector": "cpp"
-    }
-}
