@@ -33,9 +33,9 @@ int main()
         cin >> input;
         input_raw.push_back(input);
     }
-    
-    vector<vector<pair<int,int>>> stack_arr;
-    stack_arr.push_back(vector<pair<int,int>>());
+
+    vector<vector<pair<int, int>>> stack_arr;
+    stack_arr.push_back(vector<pair<int, int>>());
     int input = input_raw.back();
     input_raw.pop_back();
     auto input_pair = make_pair(input, N - 1);
@@ -50,7 +50,7 @@ int main()
         if (stack_arr[stack_p].back().first < input)
         {
             int tem = stack_p;
-            while(tem > -1 && stack_arr[tem].back().first < input)
+            while (tem > -1 && stack_arr[tem].back().first < input)
             {
                 stack_arr[tem].push_back(input_pair);
                 tem--;
@@ -59,18 +59,18 @@ int main()
         else
         {
             stack_p++;
-            stack_arr.push_back(vector<pair<int,int>>());
+            stack_arr.push_back(vector<pair<int, int>>());
             stack_arr[stack_p].push_back(input_pair);
         }
     }
 
     vector<int> answer(N);
-    for(int i = 0; i< stack_arr.size(); i++)
+    for (int i = 0; i < stack_arr.size(); i++)
     {
-        for(int j = 0; j < stack_arr[i].size()-1; j++)
-            answer[stack_arr[i][j].second] = stack_arr[i][j+1].second + 1;        
+        for (int j = 0; j < stack_arr[i].size() - 1; j++)
+            answer[stack_arr[i][j].second] = stack_arr[i][j + 1].second + 1;
     }
-    for(int i = 0 ;i<N;i++)
-        cout<<answer[i]<<' ';
-    cout<<endl;
+    for (int i = 0; i < N; i++)
+        cout << answer[i] << ' ';
+    cout << endl;
 }
