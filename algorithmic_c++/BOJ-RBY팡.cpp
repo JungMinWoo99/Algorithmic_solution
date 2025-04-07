@@ -2,6 +2,7 @@
 #include <vector>
 #include <limits>
 #include <cmath>
+#include <algorithm>
 
 using namespace std;
 
