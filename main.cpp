@@ -1,8 +1,10 @@
 #include <iostream>
-#define endl '\n';
+#define endl '\n'
 
 #include <vector>
-#include <deque>
+#include <algorithm>
+#include <cctype>
+#include <numeric>
 
 using namespace std;
 
