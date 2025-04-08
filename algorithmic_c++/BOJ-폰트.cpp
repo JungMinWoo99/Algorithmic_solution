@@ -13,7 +13,7 @@ using namespace std;
 
 #define ALPHABET_NUM 26
 
-unordered_map<unsigned long ,unsigned int> counter;
+unordered_map<bitset<ALPHABET_NUM> ,unsigned int> counter;
 
 int main()
 {
@@ -35,19 +35,19 @@ int main()
         inputs.push_back(input_bits);
     }
 
-    counter[0] = 1;
+    counter[bitset<ALPHABET_NUM>().reset()] = 1;
     for(auto& input: inputs)
     {
+        vector<pair<bitset<ALPHABET_NUM>,int>> update_list;
         for(auto& pair: counter)
-        {
-            bitset<ALPHABET_NUM> bits();
-            counter[pair.first|input.to_ulong()] += pair.second;
-        }
+            update_list.push_back({pair.first|input, pair.second});
+        for(auto& ele: update_list)
+            counter[ele.first] += ele.second;
     }
 
     bitset<ALPHABET_NUM> answer;
     answer.set();
-    cout<<counter[answer.to_ulong()]<<endl;
+    cout<<counter[answer]<<endl;
 
     return 0;
 }
