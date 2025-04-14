@@ -1,5 +1,5 @@
 #include <iostream>
-#define endl '\n';
+#define endl '\n'
 
 #include <vector>
 #include <limits>
@@ -32,10 +32,6 @@ int main()
         digits.push_back(0);
 
     deque<ll> even_th_digits;
-
-    // for(int digit:digits)
-    //     cout<<digit;
-    // cout<<endl;
 
     bool is_up = false;
     for (int idx = digits.size() - 1; idx > -1; idx--)
