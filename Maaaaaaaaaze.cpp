@@ -20,11 +20,13 @@ public:
         array<array<int, board_size>, board_size> copy(maze);
         for (int r = 0; r < board_size; r++)
         {
-            for (int c = 0; c < board_size; c++) maze[c][board_size - 1 - r] = copy[r][c];;
+            for (int c = 0; c < board_size; c++)
+                maze[c][board_size - 1 - r] = copy[r][c];
+            ;
         }
     }
 
-    array<int, board_size>& operator[](int idx)
+    array<int, board_size> &operator[](int idx)
     {
         return maze[idx];
     }
@@ -38,7 +40,8 @@ class Maze3D
 public:
     Maze3D()
     {
-        for (auto& maze_2d : maze) maze_2d = new Maze2D;
+        for (auto &maze_2d : maze)
+            maze_2d = new Maze2D;
         sort(maze.begin(), maze.end());
     }
 
@@ -49,7 +52,8 @@ public:
 
     ~Maze3D()
     {
-        for (auto& maze_2d : maze) delete maze_2d;
+        for (auto &maze_2d : maze)
+            delete maze_2d;
     }
 
     Maze2D &operator[](int idx)
@@ -58,7 +62,7 @@ public:
     }
 
 private:
-    array<Maze2D*, board_size> maze;
+    array<Maze2D *, board_size> maze;
 };
 
 int dz[] = {1, -1, 0, 0, 0, 0};
@@ -74,7 +78,8 @@ public:
     {
         for (int z = 0; z < board_size; z++)
             for (int y = 0; y < board_size; y++)
-                for (int x = 0; x < board_size; x++) cin >> maze[z][y][x];
+                for (int x = 0; x < board_size; x++)
+                    cin >> maze[z][y][x];
     }
 
     int FindPath()
@@ -125,20 +130,24 @@ private:
         vector<vector<vector<int>>> visited(
             board_size, vector<vector<int>>(board_size, vector<int>(board_size, false)));
 
+        if (maze[0][0][0] == 1)
+        {
+            visited[0][0][0] = true;
             bfs_que.push({0, 0, 0, 0});
-        visited[0][0][0] = true;
+        }
 
         while (!bfs_que.empty())
         {
             auto cur_stat = bfs_que.front();
             bfs_que.pop();
 
-            if (cur_stat.val >= min_path)
+            if (is_path_exist && cur_stat.val >= min_path)
                 continue;
 
             if (IsEscape(cur_stat.z, cur_stat.y, cur_stat.x))
             {
                 min_path = cur_stat.val;
+                is_path_exist= true;
                 continue;
             }
 
