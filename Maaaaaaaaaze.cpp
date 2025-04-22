@@ -4,7 +4,6 @@
 #include <algorithm>
 #include <array>
 #include <cctype>
-#include <numeric>
 #include <queue>
 #include <string>
 #include <vector>
@@ -15,7 +14,7 @@ constexpr int board_size = 5;
 
 class Maze2D
 {
-   public:
+public:
     void RotateRight()
     {
         array<array<int, board_size>, board_size> copy(maze);
@@ -30,13 +29,13 @@ class Maze2D
         return maze[idx];
     }
 
-   private:
+private:
     array<array<int, board_size>, board_size> maze;
 };
 
 class Maze3D
 {
-   public:
+public:
     Maze3D()
     {
         for (auto& maze_2d : maze) maze_2d = new Maze2D;
@@ -53,12 +52,12 @@ class Maze3D
         for (auto& maze_2d : maze) delete maze_2d;
     }
 
-    Maze2D& operator[](int idx)
+    Maze2D &operator[](int idx)
     {
         return *maze[idx];
     }
 
-   private:
+private:
     array<Maze2D*, board_size> maze;
 };
 
@@ -68,7 +67,7 @@ int dx[] = {0, 0, 0, 0, 1, -1};
 
 class PathFinder
 {
-   public:
+public:
     PathFinder() : maze() {}
 
     void InputMaze()
@@ -80,18 +79,20 @@ class PathFinder
 
     int FindPath()
     {
-        min_path = numeric_limits<int>::max();
+        is_path_exist = false;
+        min_path = -1;
         bool ret = true;
         while (ret)
         {
             TestAllRotateCase();
             ret = maze.SetNextPermutation();
         }
-        if (min_path == numeric_limits<int>::max()) min_path = -1;
+
         return min_path;
     }
 
-   private:
+private:
+    bool is_path_exist;
     int min_path;
     Maze3D maze;
 
@@ -124,7 +125,7 @@ class PathFinder
         vector<vector<vector<int>>> visited(
             board_size, vector<vector<int>>(board_size, vector<int>(board_size, false)));
 
-        bfs_que.push({0, 0, 0, 0});
+            bfs_que.push({0, 0, 0, 0});
         visited[0][0][0] = true;
 
         while (!bfs_que.empty())
@@ -133,7 +134,7 @@ class PathFinder
             bfs_que.pop();
 
             if (cur_stat.val >= min_path)
-                continue;                
+                continue;
 
             if (IsEscape(cur_stat.z, cur_stat.y, cur_stat.x))
             {
