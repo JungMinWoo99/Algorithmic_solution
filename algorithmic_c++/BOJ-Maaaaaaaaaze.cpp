@@ -4,7 +4,6 @@
 #include <algorithm>
 #include <array>
 #include <cctype>
-#include <numeric>
 #include <queue>
 #include <string>
 #include <vector>
@@ -15,31 +14,34 @@ constexpr int board_size = 5;
 
 class Maze2D
 {
-   public:
+public:
     void RotateRight()
     {
         array<array<int, board_size>, board_size> copy(maze);
         for (int r = 0; r < board_size; r++)
         {
-            for (int c = 0; c < board_size; c++) maze[c][board_size - 1 - r] = copy[r][c];;
+            for (int c = 0; c < board_size; c++)
+                maze[c][board_size - 1 - r] = copy[r][c];
+            ;
         }
     }
 
-    array<int, board_size>& operator[](int idx)
+    array<int, board_size> &operator[](int idx)
     {
         return maze[idx];
     }
 
-   private:
+private:
     array<array<int, board_size>, board_size> maze;
 };
 
 class Maze3D
 {
-   public:
+public:
     Maze3D()
     {
-        for (auto& maze_2d : maze) maze_2d = new Maze2D;
+        for (auto &maze_2d : maze)
+            maze_2d = new Maze2D;
         sort(maze.begin(), maze.end());
     }
 
@@ -50,16 +52,17 @@ class Maze3D
 
     ~Maze3D()
     {
-        for (auto& maze_2d : maze) delete maze_2d;
+        for (auto &maze_2d : maze)
+            delete maze_2d;
     }
 
-    Maze2D& operator[](int idx)
+    Maze2D &operator[](int idx)
     {
         return *maze[idx];
     }
 
-   private:
-    array<Maze2D*, board_size> maze;
+private:
+    array<Maze2D *, board_size> maze;
 };
 
 int dz[] = {1, -1, 0, 0, 0, 0};
@@ -68,30 +71,33 @@ int dx[] = {0, 0, 0, 0, 1, -1};
 
 class PathFinder
 {
-   public:
+public:
     PathFinder() : maze() {}
 
     void InputMaze()
     {
         for (int z = 0; z < board_size; z++)
             for (int y = 0; y < board_size; y++)
-                for (int x = 0; x < board_size; x++) cin >> maze[z][y][x];
+                for (int x = 0; x < board_size; x++)
+                    cin >> maze[z][y][x];
     }
 
     int FindPath()
     {
-        min_path = numeric_limits<int>::max();
+        is_path_exist = false;
+        min_path = -1;
         bool ret = true;
         while (ret)
         {
             TestAllRotateCase();
             ret = maze.SetNextPermutation();
         }
-        if (min_path == numeric_limits<int>::max()) min_path = -1;
+
         return min_path;
     }
 
-   private:
+private:
+    bool is_path_exist;
     int min_path;
     Maze3D maze;
 
@@ -124,20 +130,24 @@ class PathFinder
         vector<vector<vector<int>>> visited(
             board_size, vector<vector<int>>(board_size, vector<int>(board_size, false)));
 
-        bfs_que.push({0, 0, 0, 0});
-        visited[0][0][0] = true;
+        if (maze[0][0][0] == 1)
+        {
+            visited[0][0][0] = true;
+            bfs_que.push({0, 0, 0, 0});
+        }
 
         while (!bfs_que.empty())
         {
             auto cur_stat = bfs_que.front();
             bfs_que.pop();
 
-            if (cur_stat.val >= min_path)
-                continue;                
+            if (is_path_exist && cur_stat.val >= min_path)
+                continue;
 
             if (IsEscape(cur_stat.z, cur_stat.y, cur_stat.x))
             {
                 min_path = cur_stat.val;
+                is_path_exist= true;
                 continue;
             }
 
